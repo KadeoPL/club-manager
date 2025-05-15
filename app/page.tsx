@@ -1,9 +1,8 @@
-import MainNavbar from "@/components/layout/MainNavbar";
-
+import { Navbar } from "@/components/layout/navbar";
 export default function Home() {
   return (
-    <>
-      <MainNavbar />
-    </>
+    <div className="w-full min-h-max">
+      <Navbar />
+    </div>
   );
 }
