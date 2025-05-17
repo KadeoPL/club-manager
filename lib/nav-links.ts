@@ -2,42 +2,29 @@ export const navLinks = [
   { title: "Aktualności", url: "/aktualnosci" },
   {
     title: "Seniorzy",
-    url: "/seniorzy",
-    items: [{ title: "Skład", url: "/seniorzy/sklad" }],
+    url: "",
+    items: [
+      { title: "Skład", url: "/seniorzy/sklad" },
+      { title: "Terminarz i wyniki", url: "/seniorzy/terminarz" },
+      { title: "Tabela", url: "/seniorzy/tabela" },
+    ],
   },
   {
-    title: "Szkółka Piłkarska „Młoda Gdovia”",
-    url: "/mloda-gdovia",
+    title: "Szkółka piłkarska",
+    url: "",
     items: [
-      {
-        title: "Dla rodziców",
-        url: "/mloda-gdovia/dla-rodzicow",
-        items: [
-          { title: "Nabór", url: "/mloda-gdovia/dla-rodzicow/nabor" },
-          { title: "Opłaty", url: "/mloda-gdovia/dla-rodzicow/oplaty" },
-          {
-            title: "Dokumenty",
-            url: "/mloda-gdovia/dla-rodzicow/dokumenty",
-            items: [
-              {
-                title: "Standardy Ochrony Małoletnich",
-                url: "/mloda-gdovia/dla-rodzicow/dokumenty/standardy-ochrony-maloletnich",
-              },
-            ],
-          },
-        ],
-      },
+      { title: "Roczniki", url: "/szkolka-pilkarska/roczniki" },
+      { title: "Dla rodziców", url: "/szkolka-pilkarska/dla-rodzicow" },
     ],
   },
   {
     title: "Multimedia",
-    url: "/multimedia",
+    url: "",
     items: [
       { title: "Galeria", url: "/multimedia/galeria" },
       { title: "Pliki do pobrania", url: "/multimedia/pliki-do-pobrania" },
       { title: "Przydatne linki", url: "/multimedia/przydatne-linki" },
     ],
   },
-  { title: "100 lat Gdovii", url: "/100-lat-gdovii" },
   { title: "Kontakt", url: "/kontakt" },
 ];
