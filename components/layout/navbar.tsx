@@ -68,32 +68,38 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
         {/* Mobile */}
-        <div className="block lg:hidden">
+        <div className="flex  lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline">
                 <Menu />
               </Button>
             </SheetTrigger>
-            <SheetHeader>
+            <SheetHeader className="hidden">
               <SheetTitle className="hidden">Menu</SheetTitle>
             </SheetHeader>
 
             <SheetContent>
-              <Accordion type="single" collapsible className="mt-16 pl-8">
+              <Accordion type="single" collapsible className="mt-16 px-8">
                 {navLinks.map((item, index) =>
                   !item.items ? (
-                    <AccordionItem value={`item-${index}`} key={index}>
+                    <AccordionItem
+                      value={`item-${index}`}
+                      key={index}
+                      className="focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180"
+                    >
                       <Link href={item.url}>{item.title}</Link>
                     </AccordionItem>
                   ) : (
                     <AccordionItem value={`item-${index}`} key={index}>
                       <AccordionTrigger>{item.title}</AccordionTrigger>
                       <AccordionContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                        <ul className="flex flex-col gap-4 pl-4">
                           {item.items.map((item) => (
                             <li key={item.title}>
-                              <Link href={item.url}>{item.title}</Link>
+                              <Link href={item.url} className="hover:underline">
+                                {item.title}
+                              </Link>
                             </li>
                           ))}
                         </ul>
