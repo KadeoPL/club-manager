@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeroSectionSlide from "../ui/heroSectionSlide";
 
 const articles = [
@@ -23,6 +23,16 @@ const articles = [
 
 export default function HeroSection() {
   const [activeArticle, setActiveArticle] = useState<number>(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveArticle((prevArticlesIndex) =>
+        prevArticlesIndex === articles.length - 1 ? 0 : prevArticlesIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleClick = (direction: "prev" | "next") => {
     if (direction === "next") {
