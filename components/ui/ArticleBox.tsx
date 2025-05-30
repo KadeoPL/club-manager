@@ -9,7 +9,7 @@ export default function ArticleBox({ isFirst }: Props) {
     <div className="w-full flex flex-col gap-2">
       <div className={`${isFirst ? "h-100" : "h-40"} bg-red-300`}></div>
       <div>
-        <p className="uppercase text-sm">Kategoria</p>
+        <p className="uppercase text-xs">Kategoria</p>
       </div>
       <div>
         <h1 className="text-xl font-bold">Tytuł jakiś tutaj będzie</h1>
