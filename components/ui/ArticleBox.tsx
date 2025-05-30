@@ -1,9 +1,13 @@
 import React from "react";
 
-export default function ArticleBox() {
+interface Props {
+  isFirst?: boolean;
+}
+
+export default function ArticleBox({ isFirst }: Props) {
   return (
     <div className="w-full flex flex-col gap-2">
-      <div className="h-60 bg-red-300"></div>
+      <div className={`${isFirst ? "h-100" : "h-40"} bg-red-300`}></div>
       <div>
         <p className="uppercase text-sm">Kategoria</p>
       </div>

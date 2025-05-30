@@ -8,9 +8,15 @@ export default function News() {
         <h1 className="text-3xl font-bold">Ostatnie aktualności</h1>
       </div>
       <div className="flex gap-4">
-        <ArticleBox />
-        <ArticleBox />
-        <ArticleBox />
+        <div className="w-1/2">
+          <ArticleBox isFirst={true} />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <ArticleBox />
+          <ArticleBox />
+          <ArticleBox />
+          <ArticleBox />
+        </div>
       </div>
     </div>
   );
