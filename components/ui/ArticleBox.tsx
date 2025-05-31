@@ -7,7 +7,7 @@ interface Props {
 export default function ArticleBox({ isFirst }: Props) {
   return (
     <div className="w-full flex flex-col gap-2">
-      <div className={`${isFirst ? "h-100" : "h-40"} bg-red-300`}></div>
+      <div className={`${isFirst ? "h-80 md:h-100" : "h-40"} bg-red-300`}></div>
       <div>
         <p className="uppercase text-xs">Kategoria</p>
       </div>
