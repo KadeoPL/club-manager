@@ -6,17 +6,17 @@ import HeroSectionSlide from "../ui/heroSectionSlide";
 const articles = [
   {
     text: "Trener Wyroba o mijającej rundzie i okresie przygotowawczym",
-    img: "",
+    img: "/images/1.jpg",
     url: "",
   },
   {
     text: "Jakiś inny tytuł tutaj",
-    img: "",
+    img: "/images/2.jpg",
     url: "",
   },
   {
     text: "Jeszcze jakiś inny tytuł tutaj",
-    img: "",
+    img: "/images/1.jpg",
     url: "",
   },
 ];
