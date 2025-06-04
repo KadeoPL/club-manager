@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import { Button } from "../ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 interface Props {
   text: string;
@@ -11,10 +14,17 @@ interface Props {
 
 export default function HeroSectionSlide({ text, img, url, onClick }: Props) {
   return (
-    <div className="w-full h-[720px] bg-red-500 ">
+    <div className="w-full h-[720px] overflow-hidden relative">
+      <Image
+        key={img}
+        src={img}
+        alt={text}
+        fill
+        className="object-cover -z-10 animate-heroSectionImageZoom"
+      />
       <div className="w-full h-full flex justify-center bg-gradient-to-t from-black/70 to-black/0">
         <div className="w-full flex flex-col md:flex-row md:justify-center md:items-end justify-end max-w-6xl mb-16 px-10 gap-10">
-          <div className="w-full md:w-2/3 text-4xl font-bold text-white">
+          <div className="w-full md:w-2/3 text-3xl md:text-4xl font-bold text-white">
             {text}
           </div>
           <div className="w-full md:w-1/3 flex justify-start md:justify-end gap-2">
