@@ -14,11 +14,11 @@ const articles = [
     img: "/images/2.jpg",
     url: "",
   },
-  {
-    text: "Jeszcze jakiś inny tytuł tutaj",
-    img: "/images/1.jpg",
-    url: "",
-  },
+  // {
+  //   text: "Jeszcze jakiś inny tytuł tutaj",
+  //   img: "/images/1.jpg",
+  //   url: "",
+  // },
 ];
 
 export default function HeroSection() {
@@ -32,7 +32,7 @@ export default function HeroSection() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [activeArticle]);
 
   const handleClick = (direction: "prev" | "next") => {
     if (direction === "next") {

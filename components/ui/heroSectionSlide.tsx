@@ -24,7 +24,10 @@ export default function HeroSectionSlide({ text, img, url, onClick }: Props) {
       />
       <div className="w-full h-full flex justify-center bg-gradient-to-t from-black/70 to-black/0">
         <div className="w-full flex flex-col md:flex-row md:justify-center md:items-end justify-end max-w-6xl mb-16 px-10 gap-10">
-          <div className="w-full md:w-2/3 text-3xl md:text-4xl font-bold text-white">
+          <div
+            className="w-full md:w-2/3 text-3xl md:text-4xl font-bold text-white animate-heroSectionText"
+            key={img}
+          >
             {text}
           </div>
           <div className="w-full md:w-1/3 flex justify-start md:justify-end gap-2">

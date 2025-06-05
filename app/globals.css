@@ -41,7 +41,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --animate-heroSectionImageZoom: heroSectionImageZoom 10s ease-in-out infinite;
+  --animate-heroSectionImageZoom: heroSectionImageZoom 5s ease-in-out infinite;
+  --animate-heroSectionText: heroSectionText 2s ease-in;
 
   @keyframes heroSectionImageZoom {
     0% {
@@ -49,6 +50,17 @@
     }
     100% {
       transform: scale(1.1);
+    }
+  }
+
+  @keyframes heroSectionText {
+    0% {
+      transform: translateY(200%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 }
