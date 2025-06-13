@@ -29,12 +29,21 @@ import { navLinks } from "@/lib/nav-links";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
     <>
       <div className="w-full flex h-16 px-10 lg:h-32 max-w-6xl mx-auto justify-between items-center">
-        <div className="flex justify-center items-center">Logo</div>
+        <div className="flex justify-center items-center">
+          <Image
+            src="/images/gdovia_logo.png"
+            alt="Gdovia Gdów Herb"
+            width={80}
+            height={80}
+            className="w-12 h-12 lg:w-20 lg:h-20"
+          />
+        </div>
         {/* Desktop */}
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList>
