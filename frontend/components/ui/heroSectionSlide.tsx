@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "./button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
