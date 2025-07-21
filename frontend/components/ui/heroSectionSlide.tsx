@@ -21,6 +21,8 @@ export default function HeroSectionSlide({ text, img, url, onClick }: Props) {
         alt={text}
         fill
         className="object-cover -z-10 animate-heroSectionImageZoom"
+        blurDataURL={img}
+        placeholder="blur"
       />
       <div className="w-full h-full flex justify-center bg-gradient-to-t from-black/70 to-black/0">
         <div className="w-full flex flex-col md:flex-row md:justify-center md:items-end justify-end max-w-6xl mb-16 px-10 gap-10">
