@@ -28,8 +28,6 @@ export default function ArticleBox({
           fill
           alt={title}
           className="object-cover transiton-all hover:scale-110 duration-300 ease-in-out"
-          blurDataURL={image}
-          placeholder="blur"
         />
       </div>
       <div>

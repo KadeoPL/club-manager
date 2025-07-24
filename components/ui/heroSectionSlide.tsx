@@ -4,33 +4,32 @@ import React from "react";
 import { Button } from "./button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { ArticlesType } from "@/types/articles";
 
-interface Props {
-  text: string;
-  img: string;
-  url: string;
+interface HeroArticlesType extends ArticlesType {
   onClick: (direction: "prev" | "next") => void;
 }
 
-export default function HeroSectionSlide({ text, img, url, onClick }: Props) {
+export default function HeroSectionSlide({
+  id,
+  contentText,
+  title,
+  coverImage,
+  onClick,
+}: HeroArticlesType) {
   return (
     <div className="w-full h-[720px] overflow-hidden relative">
       <Image
-        key={img}
-        src={img}
-        alt={text}
+        key={id}
+        src={coverImage.url}
+        alt={coverImage.alternativeText}
         fill
         className="object-cover -z-10 animate-heroSectionImageZoom"
-        blurDataURL={img}
-        placeholder="blur"
       />
       <div className="w-full h-full flex justify-center bg-gradient-to-t from-black/70 to-black/0">
         <div className="w-full flex flex-col md:flex-row md:justify-center md:items-end justify-end max-w-6xl mb-16 px-10 gap-10">
-          <div
-            className="w-full md:w-2/3 text-3xl md:text-4xl font-bold text-white animate-heroSectionText"
-            key={img}
-          >
-            {text}
+          <div className="w-full md:w-2/3 text-3xl md:text-4xl font-bold text-white animate-heroSectionText">
+            {title}
           </div>
           <div className="w-full md:w-1/3 flex justify-start md:justify-end gap-2">
             <Button
