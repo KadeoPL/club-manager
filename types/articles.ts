@@ -7,6 +7,6 @@ export type ArticlesType = {
 
 type CoverImageType = {
   id: string;
-  alternativeText: string;
+  alternativeText?: string;
   url: string;
 };

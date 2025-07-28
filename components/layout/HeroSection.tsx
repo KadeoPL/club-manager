@@ -5,24 +5,6 @@ import HeroSectionSlide from "../ui/heroSectionSlide";
 import { fetchArticles } from "@/lib/api/api";
 import { ArticlesType } from "@/types/articles";
 
-// const articles = [
-//   {
-//     text: "Trener Wyroba o mijającej rundzie i okresie przygotowawczym",
-//     img: "/images/1.jpg",
-//     url: "",
-//   },
-//   {
-//     text: "Jakiś inny tytuł tutaj",
-//     img: "/images/2.jpg",
-//     url: "",
-//   },
-//   // {
-//   //   text: "Jeszcze jakiś inny tytuł tutaj",
-//   //   img: "/images/1.jpg",
-//   //   url: "",
-//   // },
-// ];
-
 export default function HeroSection() {
   const [activeArticle, setActiveArticle] = useState<number>(0);
   const [articles, setArticles] = useState<ArticlesType[]>([]);
@@ -39,7 +21,7 @@ export default function HeroSection() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [activeArticle]);
+  }, [articles.length]);
 
   const handleClick = (direction: "prev" | "next") => {
     if (direction === "next") {
@@ -53,6 +35,7 @@ export default function HeroSection() {
     }
   };
 
+  if (!articles.length) return <div>Ładowanie...</div>;
   return (
     <HeroSectionSlide
       id={articles[activeArticle].id}

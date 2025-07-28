@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: ["srv30.mikr.us"],
+  },
 };
 
 export default nextConfig;

@@ -6,6 +6,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { ArticlesType } from "@/types/articles";
 
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+
 interface HeroArticlesType extends ArticlesType {
   onClick: (direction: "prev" | "next") => void;
 }
@@ -21,8 +23,12 @@ export default function HeroSectionSlide({
     <div className="w-full h-[720px] overflow-hidden relative">
       <Image
         key={id}
-        src={coverImage.url}
-        alt={coverImage.alternativeText}
+        src={STRAPI_URL + coverImage.url}
+        alt={
+          coverImage.alternativeText
+            ? coverImage.alternativeText
+            : "Brak alternatywnego opisu zdjęcia"
+        }
         fill
         className="object-cover -z-10 animate-heroSectionImageZoom"
       />
