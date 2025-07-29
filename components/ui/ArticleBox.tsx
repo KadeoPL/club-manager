@@ -26,6 +26,7 @@ export default function ArticleBox({
         <Image
           src={image}
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           alt={title}
           className="object-cover transiton-all hover:scale-110 duration-300 ease-in-out"
         />

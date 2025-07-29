@@ -33,6 +33,7 @@ export default function MatchBox({ isEnd }: Props) {
             <Image
               src="/images/gdovia_logo.png"
               alt="Gdovia Gdów logo"
+              sizes="(max-width: 768px) 50vw, 33vw"
               fill
               style={{ objectFit: "contain" }}
             />
@@ -69,6 +70,7 @@ export default function MatchBox({ isEnd }: Props) {
               src="/images/gdovia_logo.png"
               alt="Gdovia Gdów logo"
               fill
+              sizes="(max-width: 768px) 50vw, 33vw"
               style={{ objectFit: "contain" }}
             />
           </motion.div>

@@ -8,13 +8,14 @@ export default function StrategicPartnershipSection() {
     <div className="flex flex-col sm:flex-row justify-center bg-primary mt-15 py-10">
       <div className="w-full lg:w-[1260px] px-10">
         <div className="flex flex-col sm:flex-row w-full">
-          <div className="w-full sm:w-1/2 grid place-items-center">
+          <div className="w-full sm:w-1/2 flex justify-center items-center">
             <FadeInFrom direction="left">
               <Image
                 src="/images/gdovia_logo.png"
                 alt="Herb Gdovia"
+                height={180}
                 width={160}
-                height={160}
+                className="h-[180px] w-[160px]"
               />
             </FadeInFrom>
           </div>
