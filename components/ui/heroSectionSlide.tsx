@@ -20,7 +20,7 @@ export default function HeroSectionSlide({
   onClick,
 }: HeroArticlesType) {
   return (
-    <div className="w-full h-[720px] overflow-hidden relative">
+    <div className="w-full md:h-[720px] h-[500px] overflow-hidden relative">
       <Image
         key={id}
         src={STRAPI_URL + coverImage.url}
@@ -30,7 +30,10 @@ export default function HeroSectionSlide({
             : "Brak alternatywnego opisu zdjęcia"
         }
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1920px"
         className="object-cover -z-10 animate-heroSectionImageZoom"
+        priority
+        quality={100}
       />
       <div className="w-full h-full flex justify-center bg-gradient-to-t from-black/70 to-black/0">
         <div className="w-full flex flex-col md:flex-row md:justify-center md:items-end justify-end max-w-6xl mb-16 px-10 gap-10">
