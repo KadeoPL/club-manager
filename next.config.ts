@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["srv30.mikr.us"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "srv30.mikr.us",
+        port: "30209",
+        pathname: "/uploads/**",
+      },
+    ],
   },
 };
 
