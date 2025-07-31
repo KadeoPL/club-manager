@@ -37,20 +37,20 @@ export default function HeroSection() {
     }
   };
 
-  if (!articles) {
+  const message = !articles
+    ? "Wystąpił błąd podczas ładowania artykułów."
+    : articles.length === 0
+    ? "Ładowanie..."
+    : null;
+
+  if (!articles || message) {
     return (
-      <div className="w-full md:h-[720px] h-[500px] overflow-hidden bg-gray-200 flex justify-center items-center">
-        <p>Wystąpił błąd podczas ładowania artykułów.</p>
+      <div className="w-full md:h-[720px] h-[500px] overflow-hidden bg-gray-300 flex justify-center items-center p-10 text-center">
+        <p>{message}</p>
       </div>
     );
   }
 
-  if (!articles.length)
-    return (
-      <div className="w-full md:h-[720px] h-[500px] overflow-hidden bg-gray-200">
-        <p>Ładowanie...</p>
-      </div>
-    );
   return (
     <HeroSectionSlide
       id={articles[activeArticle].id}
