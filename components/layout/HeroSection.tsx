@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import HeroSectionSlide from "../ui/heroSectionSlide";
-import { fetchArticles } from "@/lib/api/api";
+import { fetchLatestArticles } from "@/lib/api/api";
 import { ArticlesType } from "@/types/articles";
 
 export default function HeroSection() {
@@ -10,7 +10,7 @@ export default function HeroSection() {
   const [articles, setArticles] = useState<ArticlesType[] | null>(null);
 
   useEffect(() => {
-    fetchArticles().then(setArticles);
+    fetchLatestArticles(0, 3).then(setArticles);
   }, []);
 
   useEffect(() => {

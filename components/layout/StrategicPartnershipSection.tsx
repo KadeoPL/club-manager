@@ -5,7 +5,7 @@ import { FadeInFrom } from "../animations/fadeInFrom";
 
 export default function StrategicPartnershipSection() {
   return (
-    <div className="flex flex-col sm:flex-row justify-center bg-primary mt-15 py-10">
+    <div className="flex flex-col sm:flex-row justify-center bg-primary mt-15 py-10 overflow-hidden">
       <div className="w-full lg:w-[1260px] px-10">
         <div className="flex flex-col sm:flex-row w-full">
           <div className="w-full sm:w-1/2 flex justify-center items-center">
