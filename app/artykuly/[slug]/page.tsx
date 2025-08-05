@@ -1,4 +1,8 @@
 import { getArticleBySlug } from "@/lib/api/api";
+import {
+  BlocksRenderer,
+  type BlocksContent,
+} from "@strapi/blocks-react-renderer";
 
 export default async function Page({
   params,
@@ -8,7 +12,10 @@ export default async function Page({
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
 
-  console.log(article);
-
-  return <div>My Post: {slug}</div>;
+  if (!article) {
+    return <div>Nie znaleziono artykułu</div>;
+  }
+  article.content.map((index: number) => {
+    return <BlocksRenderer content={article.content[index]} />;
+  });
 }

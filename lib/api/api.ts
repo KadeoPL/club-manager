@@ -17,7 +17,7 @@ export async function fetchAllArticles() {
 export async function getArticleBySlug(slug: string) {
   try {
     const res = await fetch(
-      `${STRAPI_URL}/api/articles?filters[slug][$eq]=${slug}`
+      `${STRAPI_URL}/api/articles?filters[slug][$eq]=${slug}&populate=*`
     );
     if (!res.ok) {
       throw new Error("Failed to get article");
