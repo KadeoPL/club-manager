@@ -36,13 +36,17 @@ export default function Navbar() {
     <>
       <div className="w-full flex h-16 px-10 lg:h-32 max-w-6xl mx-auto justify-between items-center">
         <div className="flex justify-center items-center">
-          <Image
-            src="/images/gdovia_logo.png"
-            alt="Gdovia Gdów Herb"
-            width={80}
-            height={80}
-            className="w-12 h-12 lg:w-20 lg:h-20"
-          />
+          <Link href="/">
+            <div className="w-20 h-20 relative">
+              <Image
+                src="/images/gdovia_logo.png"
+                alt="Gdovia Gdów Herb"
+                fill
+                sizes="80px"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+          </Link>
         </div>
         {/* Desktop */}
         <NavigationMenu className="hidden lg:flex">
