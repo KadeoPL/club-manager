@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { getGlobalData } from "@/lib/api/getGlobalData";
+import Navbar from "@/components/layout/Navbar";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -37,6 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" className={font.className}>
+      <Navbar />
       <body className={`antialiased`}>{children}</body>
     </html>
   );

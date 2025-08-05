@@ -14,4 +14,5 @@ export type ArticlesType = {
   title: string;
   contentText: string;
   coverImage: CoverImageType;
+  slug: string;
 };

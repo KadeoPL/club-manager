@@ -52,12 +52,6 @@ export default function HeroSection() {
   }
 
   return (
-    <HeroSectionSlide
-      id={articles[activeArticle].id}
-      title={articles[activeArticle].title}
-      coverImage={articles[activeArticle].coverImage}
-      onClick={handleClick}
-      contentText={articles[activeArticle].contentText}
-    />
+    <HeroSectionSlide article={articles[activeArticle]} onClick={handleClick} />
   );
 }
