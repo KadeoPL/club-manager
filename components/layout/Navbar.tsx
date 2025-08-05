@@ -34,10 +34,10 @@ import Image from "next/image";
 export default function Navbar() {
   return (
     <>
-      <div className="w-full flex h-16 px-10 lg:h-32 max-w-6xl mx-auto justify-between items-center">
+      <div className="w-full flex h-16 px-4 lg:px-10 py-2 lg:h-32 max-w-6xl mx-auto justify-between items-center">
         <div className="flex justify-center items-center">
           <Link href="/">
-            <div className="w-20 h-20 relative">
+            <div className="w-20 h-12 lg:h-32 relative">
               <Image
                 src="/images/gdovia_logo.png"
                 alt="Gdovia Gdów Herb"
