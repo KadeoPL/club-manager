@@ -15,7 +15,9 @@ export default async function Page({
   if (!article) {
     return <div>Nie znaleziono artykułu</div>;
   }
-  article.content.map((index: number) => {
-    return <BlocksRenderer content={article.content[index]} />;
-  });
+  {
+    article.content.map((block: BlocksContent, index: number) => {
+      return <BlocksRenderer key={index} content={block} />;
+    });
+  }
 }
