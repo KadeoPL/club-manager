@@ -8,7 +8,7 @@ export async function GET(req: Request) {
   const username = searchParams.get("username");
 
   if (!username) {
-    return new Response(JSON.stringify({ message: " Username is required" }), {
+    return new Response(JSON.stringify({ message: "Username is required" }), {
       status: 400,
     });
   }
@@ -16,13 +16,17 @@ export async function GET(req: Request) {
   try {
     const client = await pool.connect();
     const res = await client.query(
-      "SELECT id, login, password, role FROM users WHERE name = $1",
+      "SELECT id, name, password, role FROM users WHERE name = $1",
       [username]
     );
-    client.release;
+
+    client.release();
 
     if (res.rows.length > 0) {
-      return new Response(JSON.stringify(res.rows[0]), { status: 200 });
+      return new Response(JSON.stringify(res.rows[0]), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
     } else {
       return new Response(JSON.stringify({ message: "User not found" }), {
         status: 404,
