@@ -13,14 +13,18 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { PasswordInput } from "@/components/ui/password-input";
+import { PasswordInput } from "./passwordInput";
 
 const formSchema = z.object({
-  name_5889631715: z.string().min(1).min(3),
-  name_0084383507: z.string().min(8),
+  login: z
+    .string({ required_error: "Login jest wymagany" })
+    .min(1, { message: "Login jest wymagany" }),
+  password: z
+    .string({ required_error: "Hasło jest wymagane" })
+    .min(8, { message: "Hasło musi mieć co najmniej 8 znaków" }),
 });
 
-export default function MyForm() {
+export default function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
@@ -47,7 +51,7 @@ export default function MyForm() {
       >
         <FormField
           control={form.control}
-          name="name_5889631715"
+          name="login"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Login</FormLabel>
@@ -62,7 +66,7 @@ export default function MyForm() {
 
         <FormField
           control={form.control}
-          name="name_0084383507"
+          name="password"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Hasło</FormLabel>
@@ -75,7 +79,7 @@ export default function MyForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Wyślij</Button>
       </form>
     </Form>
   );
