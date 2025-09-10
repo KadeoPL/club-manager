@@ -16,7 +16,7 @@ export async function GET(req: Request) {
   try {
     const client = await pool.connect();
     const res = await client.query(
-      "SELECT id, name, password, role FROM users WHERE name = $1",
+      "SELECT id, login, password, role FROM users WHERE login = $1",
       [username]
     );
 
