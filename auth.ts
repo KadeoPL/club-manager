@@ -1,25 +1,39 @@
 import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-// Your own logic for dealing with plaintext password strings; be careful!
-import { getUserFromDb } from "./app/utils/getUserFromDb";
+import PostgresAdapter from "@auth/pg-adapter";
+import Credentials from "@auth/core/providers/credentials";
+import { Pool } from "pg";
+import { saltAndHashPassword } from "./utils/saltAndHashPassword";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+const pool = new Pool({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+});
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  adapter: PostgresAdapter(pool),
   providers: [
     Credentials({
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
-        login: {},
+        username: {},
         password: {},
       },
       authorize: async (credentials) => {
         let user = null;
 
         // logic to salt and hash password
-        // const pwHash = saltAndHashPassword(credentials.password);
+        const pwHash = await saltAndHashPassword(
+          credentials.password as string
+        );
 
         // logic to verify if the user exists
-        // user = await getUserFromDb(credentials.login);
+        user = await getUserFromDb(credentials.username, pwHash);
 
         if (!user) {
           // No user found, so this is their first attempt to login
