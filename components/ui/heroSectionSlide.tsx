@@ -7,8 +7,6 @@ import Image from "next/image";
 import { ArticleType } from "@/types/article";
 import Link from "next/link";
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-
 interface HeroArticlesType {
   article: ArticleType;
   onClick: (direction: "prev" | "next") => void;

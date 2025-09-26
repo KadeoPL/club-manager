@@ -2,16 +2,11 @@
 
 import { useEffect, useState } from "react";
 import HeroSectionSlide from "../ui/heroSectionSlide";
-// import { fetchLatestArticles } from "@/lib/api/api";
-import { ArticlesType } from "@/types/articles";
+import { ArticleType } from "@/types/article";
 
 export default function HeroSection() {
   const [activeArticle, setActiveArticle] = useState<number>(0);
-  const [articles, setArticles] = useState<ArticlesType[] | null>(null);
-
-  // useEffect(() => {
-  //   fetchLatestArticles(0, 3).then(setArticles);
-  // }, []);
+  const [articles, setArticles] = useState<ArticleType[] | null>(null);
 
   useEffect(() => {
     if (!articles || articles.length === 0) return;
