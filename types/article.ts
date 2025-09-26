@@ -1,4 +1,4 @@
-export interface Article {
+export interface ArticleType {
   isFirst?: boolean;
   image: string;
   title: string;
