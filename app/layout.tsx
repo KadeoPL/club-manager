@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 
 // export const metadata: Metadata = {
@@ -36,7 +36,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" className={font.className}>
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
