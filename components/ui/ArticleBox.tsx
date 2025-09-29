@@ -31,7 +31,7 @@ export default function ArticleBox({
       </div>
       <div>
         <Link
-          href={`/articles/${slug}`}
+          href={`/aktualnosci/${slug}`}
           className="text-xl font-bold transition-all hover:text-primary duration-300 ease-in-out"
         >
           {title}

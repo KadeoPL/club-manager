@@ -8,7 +8,7 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
-  const article = articles.find((article) => article.slug === slug);
+  const article = await articles.find((article) => article.slug === slug);
 
   if (!article) {
     return <div>Article not found</div>;
@@ -16,5 +16,5 @@ export default async function Page({
     return <div>Article: {article.title}</div>;
   }
 
-  return <div>Single Article Page</div>;
+  return;
 }
