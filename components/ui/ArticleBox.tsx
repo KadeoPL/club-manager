@@ -18,13 +18,15 @@ export default function ArticleBox({
           isFirst ? "h-80 md:h-100" : "h-40"
         } relative overflow-hidden`}
       >
-        <Image
-          src={image}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          alt={title}
-          className="object-cover transiton-all hover:scale-110 duration-300 ease-in-out"
-        />
+        <Link href={`/aktualnosci/${slug}`}>
+          <Image
+            src={image}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt={title}
+            className="object-cover transiton-all hover:scale-110 duration-300 ease-in-out"
+          />
+        </Link>
       </div>
       <div>
         <p className="uppercase text-xs">{category}</p>
