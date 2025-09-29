@@ -4,4 +4,5 @@ export interface ArticleType {
   title: string;
   date: string;
   category?: string;
+  slug: string;
 }
