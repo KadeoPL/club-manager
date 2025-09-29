@@ -2,7 +2,7 @@ import HeroSection from "@/components/layout/HeroSection";
 import News from "@/components/layout/News";
 import MatchSection from "@/components/layout/MatchSection";
 import StrategicPartnershipSection from "@/components/layout/StrategicPartnershipSection";
-import Navbar from "@/components/layout/Navbar";
+import LeagueTable from "@/components/ui/LeagueTable";
 
 export default function Home() {
   return (
@@ -11,6 +11,7 @@ export default function Home() {
       <MatchSection />
       <News />
       <StrategicPartnershipSection />
+      <LeagueTable />
     </div>
   );
 }

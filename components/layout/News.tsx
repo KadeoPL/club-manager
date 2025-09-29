@@ -27,7 +27,7 @@ export default function News() {
             }
           })}
         </div>
-        <div className="w-full md:w-1/2 grid grid-cols-2 gap-4">
+        <div className="w-full md:w-1/2 grid md:grid-cols-2 gap-4">
           {articles.map((article, index) => {
             if (!article.isFirst) {
               return (
