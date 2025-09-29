@@ -19,6 +19,7 @@ export default function News() {
                   image={article.image}
                   title={article.title}
                   date={article.date}
+                  slug={article.slug}
                 />
               );
             } else {
@@ -36,6 +37,7 @@ export default function News() {
                   image={article.image}
                   title={article.title}
                   date={article.date}
+                  slug={article.slug}
                 />
               );
             } else {

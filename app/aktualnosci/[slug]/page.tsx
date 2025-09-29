@@ -1,5 +1,6 @@
 import { ArticleType } from "@/types/article";
 import { articles } from "@/utils/articles";
+import ArticleSinglePage from "@/components/ui/ArticleSinglePage";
 
 export default async function Page({
   params,
@@ -12,9 +13,12 @@ export default async function Page({
 
   if (!article) {
     return <div>Article not found</div>;
-  } else {
-    return <div>Article: {article.title}</div>;
   }
+  return (
+    <div>
+      <ArticleSinglePage article={article} />
+    </div>
+  );
 
   return;
 }
