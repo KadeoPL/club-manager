@@ -1,4 +1,5 @@
 "use client";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -13,7 +14,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "./passwordInput";
-import { useState } from "react";
 
 const formSchema = z.object({
   login: z
@@ -24,7 +24,7 @@ const formSchema = z.object({
     .min(8, { message: "Hasło musi mieć co najmniej 8 znaków" }),
 });
 
-export default function LoginForm() {
+export async function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,12 +33,19 @@ export default function LoginForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {}
+  const res = await fetch("/api/users");
+  const users = await res.json();
+
+  async function onSubmit() {
+    console.log(users);
+  }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={() => {
+          onSubmit();
+        }}
         className="space-y-8 max-w-3xl mx-auto py-10"
       >
         <FormField
