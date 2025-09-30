@@ -1,85 +1,50 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { PasswordInput } from "./passwordInput";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-const formSchema = z.object({
-  login: z
-    .string({ required_error: "Login jest wymagany" })
-    .min(1, { message: "Login jest wymagany" }),
-  password: z
-    .string({ required_error: "Hasło jest wymagane" })
-    .min(8, { message: "Hasło musi mieć co najmniej 8 znaków" }),
-});
+export default function LoginForm() {
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-export async function LoginForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      login: "",
-      password: "",
-    },
-  });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
 
-  const res = await fetch("/api/users");
-  const users = await res.json();
+    console.log(name);
 
-  async function onSubmit() {
-    console.log(users);
-  }
+    const result = await signIn("credentials", {
+      redirect: false,
+      name,
+      password,
+    });
+
+    if (result?.error) {
+      setError("Nieprawidłowy login lub hasło.");
+    } else {
+      router.push("/dashboard");
+    }
+  };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={() => {
-          onSubmit();
-        }}
-        className="space-y-8 max-w-3xl mx-auto py-10"
-      >
-        <FormField
-          control={form.control}
-          name="login"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Login</FormLabel>
-              <FormControl>
-                <Input placeholder="Wpisz swój login" type="text" {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Hasło</FormLabel>
-              <FormControl>
-                <PasswordInput placeholder="Wpisz swoje hasło" {...field} />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button type="submit">Wyślij</Button>
-      </form>
-    </Form>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="password"
+        name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <button type="submit">Zaloguj się</button>
+    </form>
   );
 }

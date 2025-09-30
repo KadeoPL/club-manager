@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginForm } from "@/components/ui/loginForm";
+import LoginForm from "@/components/ui/loginForm";
 
 export default function page() {
   return (
