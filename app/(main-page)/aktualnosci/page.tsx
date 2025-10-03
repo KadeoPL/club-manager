@@ -1,4 +1,4 @@
-import ArticleBox from "@/components/ui/ArticleBox";
+import ArticleBox from "@/components/main-page-ui/ArticleBox";
 import { articles } from "@/utils/articles";
 
 export default function News() {

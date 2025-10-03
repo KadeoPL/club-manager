@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Undo2 } from "lucide-react";
-import { Power } from "lucide-react";
+import LogoutButton from "./logoutButton";
 
 export default function DashboardNavigation() {
   const { data: session } = useSession();
@@ -32,11 +32,8 @@ export default function DashboardNavigation() {
             Zalogowago jako
             <span className="font-bold  ml-1 not-italic">{userName}</span>
           </div>
-          <div className="text-sm flex">
-            <Power className="w-4 mr-1" />
-            Wyloguj
-          </div>
         </div>
+        <LogoutButton />
       </div>
     );
   }

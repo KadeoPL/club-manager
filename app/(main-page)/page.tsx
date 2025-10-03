@@ -1,8 +1,8 @@
-import HeroSection from "@/components/layout/HeroSection";
-import News from "@/components/layout/News";
-import MatchSection from "@/components/layout/MatchSection";
-import StrategicPartnershipSection from "@/components/layout/StrategicPartnershipSection";
-import LeagueTable from "@/components/ui/LeagueTable";
+import HeroSection from "@/components/main-page-layout/HeroSection";
+import News from "@/components/main-page-layout/News";
+import MatchSection from "@/components/main-page-layout/MatchSection";
+import StrategicPartnershipSection from "@/components/main-page-layout/StrategicPartnershipSection";
+import LeagueTable from "@/components/main-page-ui/LeagueTable";
 
 export default function Home() {
   return (

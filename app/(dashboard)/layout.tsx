@@ -1,4 +1,4 @@
-import DashboardNavigation from "@/components/ui/dashboardNavigation";
+import DashboardNavigation from "@/components/dashboard-ui/dashboardNavigation";
 import { SessionProvider } from "next-auth/react";
 export default function DashboardLayout({
   children,

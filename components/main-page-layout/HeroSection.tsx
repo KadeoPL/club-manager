@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import HeroSectionSlide from "../ui/heroSectionSlide";
+import HeroSectionSlide from "../main-page-ui/heroSectionSlide";
 import { ArticleType } from "@/types/article";
 
 export default function HeroSection() {

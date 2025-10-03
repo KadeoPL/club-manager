@@ -1,5 +1,5 @@
 import React from "react";
-import MatchBox from "../ui/MatchBox";
+import MatchBox from "../main-page-ui/MatchBox";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 

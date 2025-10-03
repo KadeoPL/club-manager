@@ -1,4 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
+import Navbar from "@/components/main-page-layout/Navbar";
 export default function MainPageLayout({
   children,
 }: Readonly<{

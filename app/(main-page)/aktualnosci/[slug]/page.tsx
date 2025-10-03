@@ -1,6 +1,6 @@
 import { ArticleType } from "@/types/article";
 import { articles } from "@/utils/articles";
-import ArticleSinglePage from "@/components/ui/ArticleSinglePage";
+import ArticleSinglePage from "@/components/main-page-ui/ArticleSinglePage";
 
 export default async function Page({
   params,

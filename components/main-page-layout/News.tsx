@@ -1,5 +1,5 @@
 import React from "react";
-import ArticleBox from "../ui/ArticleBox";
+import ArticleBox from "../main-page-ui/ArticleBox";
 import { articles } from "@/utils/articles";
 
 export default function News() {
