@@ -63,12 +63,12 @@ export default function LoginForm() {
               </FormLabel>
               <FormControl>
                 <Input
-                  className="placeholder:text-gray-300 placeholder:font-light text-white font-bold py-6 "
+                  className="placeholder:text-gray-300 placeholder:font-light text-white font-bold py-6 rounded-none"
                   placeholder="Wpisz swój login"
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="bg-red-100 p-2 rounded-sm" />
+              <FormMessage className="bg-red-100 p-2" />
             </FormItem>
           )}
         />
@@ -80,18 +80,18 @@ export default function LoginForm() {
               <FormLabel className="text-white">Hasło</FormLabel>
               <FormControl>
                 <Input
-                  className="placeholder:text-gray-300 placeholder:font-light text-white font-bold py-6"
+                  className="placeholder:text-gray-300 placeholder:font-light text-white font-bold py-6 rounded-none"
                   type="password"
                   placeholder="Wpisz swoje hasło"
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="bg-red-100 p-2 rounded-sm" />
+              <FormMessage className="bg-red-100 p-2" />
             </FormItem>
           )}
         />
         <Button
-          className="bg-white text-primary w-full cursor-pointer py-6 hover:bg-transparent border-2 border-white hover:text-white transition-all duration-500 ease-in-out mt-5"
+          className="bg-white text-primary w-full cursor-pointer py-6 hover:bg-transparent border-2 border-white hover:text-white transition-all duration-500 ease-in-out mt-5 rounded-none"
           type="submit"
         >
           Zaloguj
