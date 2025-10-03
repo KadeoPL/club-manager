@@ -1,20 +1,35 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { signInSchema } from "@/lib/zod";
 
 export default function LoginForm() {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      name: "",
+      password: "",
+    },
+  });
 
-    console.log(name);
+  async function onSubmit(values: z.infer<typeof signInSchema>) {
+    const { name, password } = values;
 
     const result = await signIn("credentials", {
       redirect: false,
@@ -23,28 +38,55 @@ export default function LoginForm() {
     });
 
     if (result?.error) {
-      setError("Nieprawidłowy login lub hasło.");
+      form.setError("root", {
+        type: "server",
+        message: "Nieprawidłowy login lub hasło",
+      });
     } else {
       router.push("/dashboard");
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button type="submit">Zaloguj się</button>
-    </form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Login</FormLabel>
+              <FormControl>
+                <Input placeholder="Wpisz swój login" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Hasło</FormLabel>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="Wpisz swoje hasło"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Zaloguj</Button>
+      </form>
+      {form.formState.errors.root && (
+        <p className="text-sm font-medium text-destructive mt-4">
+          {form.formState.errors.root.message}
+        </p>
+      )}
+    </Form>
   );
 }
