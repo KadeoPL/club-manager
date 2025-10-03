@@ -1,5 +1,4 @@
-import { Space_Grotesk } from "next/font/google";
-import Navbar from "@/components/layout/Navbar";
+import { Sora } from "next/font/google";
 import "./globals.css";
 
 // export const metadata: Metadata = {
@@ -24,8 +23,7 @@ import "./globals.css";
 //     },
 //   };
 // }
-
-const font = Space_Grotesk({
+const font = Sora({
   subsets: ["latin"],
 });
 
@@ -36,15 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" className={font.className}>
-      <body className={`antialiased`}>
-        <div className="flex flex-col h-screen">
-          <nav className="w-full">
-            <Navbar />
-          </nav>
-
-          <main className="flex-1 overflow-y-auto">{children}</main>
-        </div>
-      </body>
+      <body className={`antialiased`}>{children}</body>
     </html>
   );
 }
