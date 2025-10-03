@@ -49,17 +49,26 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-5 w-full max-w-sm"
+      >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Login</FormLabel>
+              <FormLabel className="text-white aria-invalid:text-red-200">
+                Login
+              </FormLabel>
               <FormControl>
-                <Input placeholder="Wpisz swój login" {...field} />
+                <Input
+                  className="placeholder:text-gray-300 placeholder:font-light text-white font-bold py-6 "
+                  placeholder="Wpisz swój login"
+                  {...field}
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="bg-red-100 p-2 rounded-sm" />
             </FormItem>
           )}
         />
@@ -68,22 +77,28 @@ export default function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Hasło</FormLabel>
+              <FormLabel className="text-white">Hasło</FormLabel>
               <FormControl>
                 <Input
+                  className="placeholder:text-gray-300 placeholder:font-light text-white font-bold py-6"
                   type="password"
                   placeholder="Wpisz swoje hasło"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="bg-red-100 p-2 rounded-sm" />
             </FormItem>
           )}
         />
-        <Button type="submit">Zaloguj</Button>
+        <Button
+          className="bg-white text-primary w-full cursor-pointer py-6 hover:bg-transparent border-2 border-white hover:text-white transition-all duration-500 ease-in-out mt-5"
+          type="submit"
+        >
+          Zaloguj
+        </Button>
       </form>
       {form.formState.errors.root && (
-        <p className="text-sm font-medium text-destructive mt-4">
+        <p className="text-sm text-destructive mt-4 bg-red-100 p-2 rounded-sm w-full max-w-sm">
           {form.formState.errors.root.message}
         </p>
       )}

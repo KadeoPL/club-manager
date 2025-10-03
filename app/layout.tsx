@@ -37,8 +37,13 @@ export default function RootLayout({
   return (
     <html lang="pl" className={font.className}>
       <body className={`antialiased`}>
-        <Navbar />
-        {children}
+        <div className="flex flex-col h-screen">
+          <nav className="w-full">
+            <Navbar />
+          </nav>
+
+          <main className="flex-1 overflow-y-auto">{children}</main>
+        </div>
       </body>
     </html>
   );
