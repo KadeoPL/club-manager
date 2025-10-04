@@ -1,1 +1,67 @@
-export const dashboardNavLinks = [{ title: "Posty", url: "" }];
+import {
+  StickyNote,
+  UserRound,
+  Trophy,
+  Calendar1,
+  Settings,
+} from "lucide-react";
+
+export const dashboardNavLinks = [
+  {
+    title: "Posty",
+    url: "#",
+    icon: StickyNote,
+    items: [
+      { title: "Dodaj post", url: "/dashboard/dodaj-post" },
+      { title: "Zarządzaj postami", url: "/dashboard/zarzadzaj-postami" },
+    ],
+  },
+  {
+    title: "Drużyna",
+    url: "#",
+    icon: UserRound,
+    items: [
+      { title: "Dodaj zawodnika", url: "#" },
+      { title: "Zarządzaj drużyną", url: "#" },
+    ],
+  },
+  {
+    title: "Mecze i wyniki",
+    url: "#",
+    icon: Trophy,
+    items: [
+      { title: "Dodaj mecz", url: "#" },
+      { title: "Zarządzaj wynikami", url: "#" },
+      { title: "Terminarz", url: "#" },
+      { title: "Tabela", url: "#" },
+    ],
+  },
+  {
+    title: "Wydarzenia",
+    url: "#",
+    icon: Calendar1,
+    items: [
+      { title: "Dodaj wydarzenie", url: "#" },
+      { title: "Zarządzaj wydarzeniami", url: "#" },
+    ],
+  },
+  {
+    title: "Sponsorzy",
+    url: "#",
+    icon: Calendar1,
+    items: [
+      { title: "Dodaj sponsora", url: "#" },
+      { title: "Zarządzaj sponsorami", url: "#" },
+    ],
+  },
+  {
+    title: "Ustawienia",
+    url: "#",
+    icon: Settings,
+    items: [
+      { title: "Dodaj użytkownika", url: "#" },
+      { title: "Zarządzaj użytkownikami", url: "#" },
+      { title: "Zarządzaj stroną", url: "#" },
+    ],
+  },
+];

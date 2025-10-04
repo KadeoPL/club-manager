@@ -9,7 +9,7 @@ export default function LogoutButton() {
 
   return (
     <div
-      className="text-sm flex cursor-pointer hover:text-gray-500"
+      className="text-xs flex items-center cursor-pointer hover:text-gray-500"
       onClick={onSubmit}
     >
       <Power className="w-4 mr-1" />
