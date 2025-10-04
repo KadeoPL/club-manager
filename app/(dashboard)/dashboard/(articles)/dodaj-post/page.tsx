@@ -15,9 +15,11 @@ const ArticleEditor = () => {
         const options = {
           modules: {
             toolbar: [
-              [{ header: [1, 2, false] }],
+              [{ header: [1, 2, 3, 4, false] }],
+              [{ color: [] }],
               ["bold", "italic", "underline"],
-              ["image", "code-block"],
+              ["image", "link"],
+              [{ list: "ordered" }, { list: "bullet" }],
             ],
           },
           theme: "snow",
