@@ -33,7 +33,7 @@ const ArticleEditor = () => {
 
   return (
     <div>
-      <h1 className="text-2xl">Tworzenie artykułu</h1>
+      <h1 className="text-2xl mb-10">Tworzenie artykułu</h1>
       <div ref={editorRef} style={{ height: "300px" }} />
     </div>
   );
