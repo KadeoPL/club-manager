@@ -13,7 +13,7 @@ export default function LogoutButton() {
       onClick={onSubmit}
     >
       <Power className="w-4 mr-1" />
-      Wyloguj
+      <p className="md:block hidden">Wyloguj</p>
     </div>
   );
 }
