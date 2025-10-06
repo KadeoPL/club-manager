@@ -21,13 +21,26 @@ export default function page() {
     resolver: zodResolver(addSponsorSchema),
     defaultValues: {
       name: "",
-      logo: "",
+      logo: undefined,
       isPartnership: false,
     },
   });
 
-  function onSubmit(values: z.infer<typeof addSponsorSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof addSponsorSchema>) {
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("isPartnership", values.isPartnership.toString());
+    if (values.logo && values.logo instanceof File) {
+      formData.append("logo", values.logo);
+    }
+
+    const res = await fetch("/api/sponsors", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    console.log("File uploaded:", data);
   }
 
   return (
