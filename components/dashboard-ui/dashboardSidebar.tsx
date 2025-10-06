@@ -33,7 +33,7 @@ export default function DashboardSidebar() {
       <SidebarContent className="gap-0 bg-slate-950 text-white">
         {dashboardNavLinks.map((item) => (
           <SidebarGroup key={item.title}>
-            <SidebarGroupLabel className="text-slate-400">
+            <SidebarGroupLabel className="text-slate-400 font-bold bg-slate-800 rounded-none">
               <item.icon />
               <span className="ml-2">{item.title}</span>
             </SidebarGroupLabel>

@@ -50,7 +50,7 @@ export const dashboardNavLinks = [
     url: "#",
     icon: Calendar1,
     items: [
-      { title: "Dodaj sponsora", url: "#" },
+      { title: "Dodaj sponsora", url: "/dashboard/dodaj-sponsora" },
       { title: "Zarządzaj sponsorami", url: "#" },
     ],
   },
