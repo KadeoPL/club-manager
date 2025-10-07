@@ -51,7 +51,7 @@ export const dashboardNavLinks = [
     icon: Calendar1,
     items: [
       { title: "Dodaj sponsora", url: "/dashboard/dodaj-sponsora" },
-      { title: "Zarządzaj sponsorami", url: "#" },
+      { title: "Zarządzaj sponsorami", url: "/dashboard/zarzadzaj-sponsorami" },
     ],
   },
   {
