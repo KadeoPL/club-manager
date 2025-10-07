@@ -21,8 +21,7 @@ export const addSponsorSchema = z.object({
     .refine((file) => ["image/png", "image/jpeg"].includes(file.type), {
       message: "Dozwolone formaty to .png i .jpeg",
     })
-    .optional()
-    .or(z.literal("")),
+    .optional(),
   isPartnership: z.boolean({
     error: "To pole jest wymagane",
   }),

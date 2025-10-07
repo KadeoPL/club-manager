@@ -12,18 +12,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function page() {
   const [sponsors, setSponsors] = useState<sponsorsType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchSponsors() {
       try {
         const res = await fetch("/api/sponsors");
         const data = await res.json();
-        console.log(data);
         setSponsors(data);
       } catch (error) {
         const message =
@@ -36,11 +37,22 @@ export default function page() {
     }
 
     fetchSponsors();
-  }, []);
+    setRefresh(false);
+  }, [refresh]);
 
   return (
     <div>
-      <h1 className="text-2xl mb-10">Zarządzaj sponsorami</h1>
+      <div className="flex justify-between">
+        <h1 className="text-2xl mb-10">Zarządzaj sponsorami</h1>
+        <Button
+          onClick={() => {
+            setRefresh(true);
+          }}
+          className="cursor-pointer active:scale-80 transition-all ease-in-out"
+        >
+          Odswież tabelę
+        </Button>
+      </div>
 
       {loading && <Spinner />}
       {error && <div className="text-red-500 mb-4">Błąd: {error}</div>}
@@ -66,8 +78,8 @@ export default function page() {
                 >
                   <TableCell className="py-4">{sponsor.name}</TableCell>
                   <TableCell className="py-4">
-                    {sponsor.isPartnership ? (
-                      <div className="px-4 py-2 bg-green-400 text-white">
+                    {sponsor.is_partnership ? (
+                      <div className="px-4 py-2 bg-green-500 text-white text-center rounded-2xl">
                         Tak
                       </div>
                     ) : (
@@ -85,7 +97,7 @@ export default function page() {
                         width={200}
                       ></Image>
                     ) : (
-                      "-"
+                      "Brak logo"
                     )}
                   </TableCell>
                   <TableCell className="py-4">Edytuj</TableCell>

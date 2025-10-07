@@ -7,8 +7,20 @@ export async function POST(req: Request) {
   const formData = await req.formData();
 
   const name = formData.get("name");
-  const isPartnership = formData.get("isPartnership") === "true";
   const logo = formData.get("logo");
+  console.log(
+    "Wartość odebrana z formularza (string):",
+    formData.get("isPartnership")
+  );
+  const isPartnershipString = formData.get("isPartnership");
+  let isPartnership = false;
+  if (isPartnershipString === "true") {
+    isPartnership = true;
+  } else if (isPartnershipString === "false") {
+    isPartnership = false;
+  }
+
+  console.log("Wartość po konwersji (boolean):", isPartnership);
 
   let filePath: string | null = null;
   let dbPath = ``;
@@ -27,22 +39,22 @@ export async function POST(req: Request) {
     } catch (error) {
       console.error(error);
     }
-
-    const query = filePath
-      ? "INSERT INTO sponsors (name, is_partnership, logo) VALUES ($1, $2, $3)"
-      : "INSERT INTO sponsors (name, is_partnership) VALUES ($1, $2)";
-
-    const values = filePath
-      ? [name, isPartnership, dbPath]
-      : [name, isPartnership];
-
-    try {
-      await pool.query(query, values);
-    } catch (error) {
-      console.error("Błąd przy zapisie sponsora:", error);
-    }
   }
+  const query = dbPath
+    ? "INSERT INTO sponsors (name, is_partnership, logo) VALUES ($1, $2, $3)"
+    : "INSERT INTO sponsors (name, is_partnership) VALUES ($1, $2)";
 
+  const values = dbPath ? [name, isPartnership, dbPath] : [name, isPartnership];
+  console.log("Wartości do bazy (values):", values);
+  try {
+    await pool.query(query, values);
+  } catch (error) {
+    console.error("Błąd przy zapisie sponsora:", error);
+    return Response.json(
+      { message: "Błąd przy zapisie sponsora" },
+      { status: 500 }
+    );
+  }
   return Response.json({ message: "OK" });
 }
 
