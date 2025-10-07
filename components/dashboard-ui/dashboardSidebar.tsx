@@ -18,7 +18,7 @@ import { dashboardNavLinks } from "@/lib/dashboard-nav-link";
 export default function DashboardSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader className="bg-slate-800 text-white">
+      <SidebarHeader className="bg-slate-800 text-white flex flex-row justify-between ">
         <Link href="/dashboard" className="font-bold">
           Panel zarządzania
         </Link>
@@ -27,10 +27,9 @@ export default function DashboardSidebar() {
           className="text-xs flex items-center hover:text-gray-500"
         >
           <Undo2 className="w-4 mr-1" />
-          Wróć do strony głównej
         </Link>
       </SidebarHeader>
-      <SidebarContent className="gap-0 bg-slate-950 text-white">
+      <SidebarContent className="gap-0 bg-slate-950 text-white pt-4">
         {dashboardNavLinks.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel className="text-slate-400 font-bold bg-slate-800 rounded-none">
