@@ -15,8 +15,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
+import Image from "next/image";
 
 export default function page() {
+  const [chooseLogo, setChooseLogo] = useState<File | undefined>(undefined);
+
   const form = useForm<z.infer<typeof addSponsorSchema>>({
     resolver: zodResolver(addSponsorSchema),
     defaultValues: {
@@ -30,6 +34,7 @@ export default function page() {
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("isPartnership", values.isPartnership.toString());
+
     if (values.logo && values.logo instanceof File) {
       formData.append("logo", values.logo);
     }
@@ -46,7 +51,7 @@ export default function page() {
   return (
     <div>
       <h1 className="text-2xl mb-10">Dodawanie sponsora</h1>
-      <div className="w-full md:w-1/2">
+      <div className="w-full  grid grid-cols-1 md:grid-cols-2 gap-10">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             <FormField
@@ -54,7 +59,7 @@ export default function page() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nazwa</FormLabel>
+                  <FormLabel>Nazwa sponsora</FormLabel>
                   <FormControl>
                     <Input placeholder="Wpisz nazwę sponsora" {...field} />
                   </FormControl>
@@ -75,6 +80,7 @@ export default function page() {
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         field.onChange(file);
+                        setChooseLogo(file);
                       }}
                     />
                   </FormControl>
@@ -102,6 +108,16 @@ export default function page() {
             <Button type="submit">Dodaj</Button>
           </form>
         </Form>
+        {chooseLogo != undefined && (
+          <div className="flex items-center justify-center  px-10 py-10">
+            <Image
+              src={URL.createObjectURL(chooseLogo)}
+              width={200}
+              height={100}
+              alt="Logo sponsora"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
