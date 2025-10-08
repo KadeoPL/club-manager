@@ -48,9 +48,8 @@ export default function page() {
           onClick={() => {
             setRefresh(true);
           }}
-          className="cursor-pointer active:scale-80 transition-all ease-in-out"
         >
-          Odswież tabelę
+          Odśwież tabelę
         </Button>
       </div>
 
@@ -67,7 +66,7 @@ export default function page() {
                 <TableHead className="w-[200px]">Nazwa</TableHead>
                 <TableHead className="w-[100px]">Partner</TableHead>
                 <TableHead className="md:table-cell hidden">Logo</TableHead>
-                <TableHead>Edycja</TableHead>
+                <TableHead>Zarządzaj</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -79,13 +78,9 @@ export default function page() {
                   <TableCell className="py-4">{sponsor.name}</TableCell>
                   <TableCell className="py-4">
                     {sponsor.is_partnership ? (
-                      <div className="px-4 py-2 bg-green-500 text-white text-center rounded-2xl">
-                        Tak
-                      </div>
+                      <div className="text-green-500">Tak</div>
                     ) : (
-                      <div className=" py-2 bg-red-500 text-white text-center rounded-2xl">
-                        Nie
-                      </div>
+                      <div className=" text-red-500">Nie</div>
                     )}
                   </TableCell>
                   <TableCell className="md:block hidden py-4">
@@ -94,13 +89,18 @@ export default function page() {
                         src={sponsor.logo}
                         alt={sponsor.name}
                         height={100}
-                        width={200}
+                        width={100}
                       ></Image>
                     ) : (
-                      "Brak logo"
+                      <div>Brak logo</div>
                     )}
                   </TableCell>
-                  <TableCell className="py-4">Edytuj</TableCell>
+                  <TableCell className="py-4">
+                    <div className="flex gap-3">
+                      <div className="cursor-pointer">Edytuj</div>
+                      <div className="text-red-500 cursor-pointer">Usuń</div>
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
