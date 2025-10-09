@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { addSponsorSchema } from "@/lib/zod";
 import {
   Form,
@@ -21,6 +21,7 @@ import { toast } from "sonner";
 
 export default function page() {
   const [chooseLogo, setChooseLogo] = useState<File | undefined>(undefined);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof addSponsorSchema>>({
     resolver: zodResolver(addSponsorSchema),
@@ -50,6 +51,11 @@ export default function page() {
 
       if (res.ok) {
         toast.success(data.message);
+        form.reset();
+        setChooseLogo(undefined);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
       } else {
         toast.error(data.message);
       }
@@ -86,6 +92,7 @@ export default function page() {
                   <FormLabel>Logo sponsora</FormLabel>
                   <FormControl>
                     <Input
+                      ref={fileInputRef}
                       type="file"
                       accept="image/png, image/jpeg"
                       onChange={(e) => {

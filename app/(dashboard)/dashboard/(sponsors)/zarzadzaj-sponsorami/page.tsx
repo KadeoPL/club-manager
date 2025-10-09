@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { deleteFromDB } from "@/lib/deleteFromDB";
+import StatusBadge from "@/components/dashboard-ui/statusBadge";
 
 export default function page() {
   const [sponsors, setSponsors] = useState<sponsorsType[]>([]);
@@ -71,18 +72,14 @@ export default function page() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sponsors.map((sponsor) => (
+              {sponsors.map((sponsor, index) => (
                 <TableRow
                   key={sponsor.id}
-                  className={sponsor.id % 2 === 0 ? "bg-white" : "bg-gray-100"}
+                  className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
                 >
                   <TableCell className="py-4">{sponsor.name}</TableCell>
                   <TableCell className="py-4">
-                    {sponsor.is_partnership ? (
-                      <div className="text-green-500">Tak</div>
-                    ) : (
-                      <div className=" text-red-500">Nie</div>
-                    )}
+                    <StatusBadge value={sponsor.is_partnership} />
                   </TableCell>
                   <TableCell className="md:block hidden py-4">
                     {sponsor.logo ? (
@@ -102,7 +99,8 @@ export default function page() {
                       <div
                         className="text-red-500 cursor-pointer"
                         onClick={() => {
-                          deleteFromDB(sponsor.id, "sponsors");
+                          deleteFromDB(sponsor.id, "sponsors", sponsor.name);
+                          setRefresh(true);
                         }}
                       >
                         Usuń

@@ -58,10 +58,8 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     const result = await pool.query("SELECT * FROM sponsors ORDER BY id ASC");
-
     return NextResponse.json(result.rows);
   } catch (error) {
-    console.error("Failed to download sponsors data", error);
     return NextResponse.json(
       { error: "Failed to download sponsors data" },
       { status: 500 }
@@ -71,11 +69,21 @@ export async function GET() {
 
 export async function DELETE(req: Request) {
   try {
-    const { id } = await req.json();
-    console.log("Usuwam sponsora o id:", id);
-    return Response.json({ message: `Sponsor ${id} usunięty` });
+    const { id, name } = await req.json();
+    const result = await pool.query(`DELETE FROM sponsors WHERE id = $1`, [id]);
+
+    if (result.rowCount !== null && result.rowCount > 0) {
+      return Response.json({ message: `Sponsor ${name} usunięty` });
+    } else {
+      return Response.json(
+        { message: `Błąd: Nie znaleziono sponsora o podanym ID.` },
+        { status: 404 }
+      );
+    }
   } catch (error) {
-    console.error("Błąd DELETE:", error);
-    return new Response("Błąd podczas usuwania sponsora", { status: 500 });
+    return Response.json(
+      { message: `Błąd przy usuwaniu sponsora, ${error}` },
+      { status: 500 }
+    );
   }
 }
