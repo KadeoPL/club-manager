@@ -1,5 +1,6 @@
 import { Sora } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -34,7 +35,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl" className={font.className}>
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <main>{children}</main>
+        <Toaster />
+      </body>
     </html>
   );
 }

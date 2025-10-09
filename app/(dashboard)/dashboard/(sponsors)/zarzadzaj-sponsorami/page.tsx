@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { deleteFromDB } from "@/lib/deleteFromDB";
 
 export default function page() {
   const [sponsors, setSponsors] = useState<sponsorsType[]>([]);
@@ -98,7 +99,14 @@ export default function page() {
                   <TableCell className="py-4">
                     <div className="flex gap-3">
                       <div className="cursor-pointer">Edytuj</div>
-                      <div className="text-red-500 cursor-pointer">Usuń</div>
+                      <div
+                        className="text-red-500 cursor-pointer"
+                        onClick={() => {
+                          deleteFromDB(sponsor.id, "sponsors");
+                        }}
+                      >
+                        Usuń
+                      </div>
                     </div>
                   </TableCell>
                 </TableRow>

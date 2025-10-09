@@ -8,10 +8,7 @@ export async function POST(req: Request) {
 
   const name = formData.get("name");
   const logo = formData.get("logo");
-  console.log(
-    "Wartość odebrana z formularza (string):",
-    formData.get("isPartnership")
-  );
+
   const isPartnershipString = formData.get("isPartnership");
   let isPartnership = false;
   if (isPartnershipString === "true") {
@@ -19,8 +16,6 @@ export async function POST(req: Request) {
   } else if (isPartnershipString === "false") {
     isPartnership = false;
   }
-
-  console.log("Wartość po konwersji (boolean):", isPartnership);
 
   let filePath: string | null = null;
   let dbPath = ``;
@@ -49,13 +44,15 @@ export async function POST(req: Request) {
   try {
     await pool.query(query, values);
   } catch (error) {
-    console.error("Błąd przy zapisie sponsora:", error);
     return Response.json(
-      { message: "Błąd przy zapisie sponsora" },
+      { message: `Błąd przy zapisie sponsora, ${error}` },
       { status: 500 }
     );
   }
-  return Response.json({ message: "OK" });
+  return Response.json({
+    success: true,
+    message: `Sponsor ${name} zostały dodany.`,
+  });
 }
 
 export async function GET() {
@@ -69,5 +66,16 @@ export async function GET() {
       { error: "Failed to download sponsors data" },
       { status: 500 }
     );
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { id } = await req.json();
+    console.log("Usuwam sponsora o id:", id);
+    return Response.json({ message: `Sponsor ${id} usunięty` });
+  } catch (error) {
+    console.error("Błąd DELETE:", error);
+    return new Response("Błąd podczas usuwania sponsora", { status: 500 });
   }
 }

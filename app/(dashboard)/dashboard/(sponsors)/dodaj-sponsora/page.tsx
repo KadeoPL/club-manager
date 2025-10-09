@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function page() {
   const [chooseLogo, setChooseLogo] = useState<File | undefined>(undefined);
@@ -39,13 +40,23 @@ export default function page() {
       formData.append("logo", values.logo);
     }
 
-    const res = await fetch("/api/sponsors", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const res = await fetch("/api/sponsors", {
+        method: "POST",
+        body: formData,
+      });
 
-    const data = await res.json();
-    console.log("File uploaded:", data);
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error("Fetch error", error);
+      toast.error("Błąd połączenia z serwerem.");
+    }
   }
 
   return (
