@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 import { addSponsorSchema } from "@/lib/zod";
 import {
   Form,
@@ -18,10 +18,10 @@ import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
+import { useDropzone } from "react-dropzone";
 
 export default function page() {
   const [chooseLogo, setChooseLogo] = useState<File | undefined>(undefined);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof addSponsorSchema>>({
     resolver: zodResolver(addSponsorSchema),
@@ -53,9 +53,6 @@ export default function page() {
         toast.success(data.message);
         form.reset();
         setChooseLogo(undefined);
-        if (fileInputRef.current) {
-          fileInputRef.current.value = "";
-        }
       } else {
         toast.error(data.message);
       }
@@ -87,24 +84,82 @@ export default function page() {
             <FormField
               control={form.control}
               name="logo"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Logo sponsora</FormLabel>
-                  <FormControl>
-                    <Input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/png, image/jpeg"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        field.onChange(file);
-                        setChooseLogo(file);
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              render={({ field }) => {
+                const { getRootProps, getInputProps, isDragActive } =
+                  useDropzone({
+                    maxFiles: 1,
+                    accept: {
+                      "image/png": [".png"],
+                      "image/jpeg": [".jpeg", ".jpg"],
+                    },
+                    onDrop: (acceptedFiles) => {
+                      const file = acceptedFiles[0];
+
+                      field.onChange(file);
+
+                      setChooseLogo(file);
+                    },
+                  });
+
+                const handleRemoveFile = () => {
+                  field.onChange(undefined);
+                  setChooseLogo(undefined);
+                };
+
+                return (
+                  <FormItem>
+                    <FormLabel>Logo sponsora</FormLabel>
+                    <FormControl>
+                      {!chooseLogo ? (
+                        <div
+                          {...getRootProps()}
+                          className={`
+                flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-md cursor-pointer 
+                ${
+                  isDragActive
+                    ? "border-blue-500 bg-blue-50"
+                    : "border-gray-300 hover:border-gray-400"
+                }
+              `}
+                        >
+                          <input {...getInputProps()} />
+
+                          <p className="text-gray-600">
+                            {isDragActive
+                              ? "Upuść plik tutaj..."
+                              : "Przeciągnij i upuść logo lub kliknij, aby wybrać plik"}
+                          </p>
+                          <p className="text-xs text-gray-400 mt-1">
+                            PNG, JPG/JPEG (max 1 plik)
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="flex items-center space-x-4 p-3 border rounded-md">
+                          <Image
+                            src={URL.createObjectURL(chooseLogo)}
+                            alt="Podgląd logo"
+                            width={60}
+                            height={60}
+                            className="object-contain"
+                          />
+                          <span className="flex-1 text-sm truncate">
+                            {chooseLogo.name}
+                          </span>
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            size="sm"
+                            onClick={handleRemoveFile}
+                          >
+                            Usuń
+                          </Button>
+                        </div>
+                      )}
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
             />
             <FormField
               control={form.control}

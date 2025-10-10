@@ -17,6 +17,7 @@ import StatusBadge from "@/components/dashboard-ui/statusBadge";
 import DeleteModal from "@/components/dashboard-ui/deleteModal";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Trash, SquarePen } from "lucide-react";
 
 export default function page() {
   const [sponsors, setSponsors] = useState<sponsorsType[]>([]);
@@ -120,10 +121,13 @@ export default function page() {
                     )}
                   </TableCell>
                   <TableCell className="py-4">
-                    <div className="flex gap-3">
-                      <div className="cursor-pointer">Edytuj</div>
+                    <div className="flex gap-4">
+                      <div className="cursor-pointer flex gap-1 items-center">
+                        <SquarePen size={16} />
+                        Edytuj
+                      </div>
                       <div
-                        className="text-red-500 cursor-pointer"
+                        className="text-red-500 cursor-pointer flex gap-1 items-center"
                         onClick={() => {
                           setSponsorsToDelete({
                             id: sponsor.id,
@@ -132,7 +136,7 @@ export default function page() {
                           setIsModalOpen(true);
                         }}
                       >
-                        Usuń
+                        <Trash size={16} /> Usuń
                       </div>
                     </div>
                   </TableCell>
