@@ -12,25 +12,36 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { deleteFromDB } from "@/lib/deleteFromDB";
 import StatusBadge from "@/components/dashboard-ui/statusBadge";
+import DeleteModal from "@/components/dashboard-ui/deleteModal";
 
 export default function page() {
   const [sponsors, setSponsors] = useState<sponsorsType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [refresh, setRefresh] = useState<boolean>(false);
+  const [sponsorToDelete, setSponsorsToDelete] = useState<{
+    id: number;
+    name: string;
+  }>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchSponsors() {
+      setLoading(true);
       try {
         const res = await fetch("/api/sponsors");
+
+        if (!res.ok) {
+          throw new Error(`HTTP error: ${res.status}`);
+        }
+
         const data = await res.json();
         setSponsors(data);
+        setError(null);
       } catch (error) {
         const message =
-          error instanceof Error ? error.message : "Nieznany błąd";
+          error instanceof Error ? error.message : "Nieznany błąd pobierania.";
         setError(message);
         console.error("Failed to download sponsors", error);
       } finally {
@@ -39,20 +50,26 @@ export default function page() {
     }
 
     fetchSponsors();
-    setRefresh(false);
-  }, [refresh]);
+  }, []);
+
+  const handleDelete = async () => {
+    if (!sponsorToDelete) return;
+
+    const success = await deleteFromDB(
+      sponsorToDelete.id,
+      "sponsors",
+      sponsorToDelete.name
+    );
+
+    if (success) {
+      setSponsors((prev) => prev.filter((s) => s.id !== sponsorToDelete.id));
+    }
+  };
 
   return (
     <div>
       <div className="flex justify-between">
         <h1 className="text-2xl mb-10">Zarządzaj sponsorami</h1>
-        <Button
-          onClick={() => {
-            setRefresh(true);
-          }}
-        >
-          Odśwież tabelę
-        </Button>
       </div>
 
       {loading && <Spinner />}
@@ -99,8 +116,11 @@ export default function page() {
                       <div
                         className="text-red-500 cursor-pointer"
                         onClick={() => {
-                          deleteFromDB(sponsor.id, "sponsors", sponsor.name);
-                          setRefresh(true);
+                          setSponsorsToDelete({
+                            id: sponsor.id,
+                            name: sponsor.name,
+                          });
+                          setIsModalOpen(true);
                         }}
                       >
                         Usuń
@@ -112,6 +132,13 @@ export default function page() {
             </TableBody>
           </Table>
         )
+      )}
+      {isModalOpen && sponsorToDelete && (
+        <DeleteModal
+          name={sponsorToDelete.name}
+          setIsOpen={setIsModalOpen}
+          onConfirm={handleDelete}
+        />
       )}
     </div>
   );
