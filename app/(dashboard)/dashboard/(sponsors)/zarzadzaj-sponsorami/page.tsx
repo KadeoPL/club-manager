@@ -15,6 +15,8 @@ import Image from "next/image";
 import { deleteFromDB } from "@/lib/deleteFromDB";
 import StatusBadge from "@/components/dashboard-ui/statusBadge";
 import DeleteModal from "@/components/dashboard-ui/deleteModal";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function page() {
   const [sponsors, setSponsors] = useState<sponsorsType[]>([]);
@@ -76,7 +78,14 @@ export default function page() {
       {error && <div className="text-red-500 mb-4">Błąd: {error}</div>}
 
       {sponsors.length === 0 && !loading && !error ? (
-        <div>Brak sponsorów do wyświetlenia</div>
+        <div>
+          <div className="font-bold mb-5">
+            Nie masz jeszcze żadnych sponsorów.
+          </div>
+          <Button>
+            <Link href={"/dashboard/dodaj-sponsora"}> Dodaj sponsora</Link>
+          </Button>
+        </div>
       ) : (
         sponsors.length > 0 && (
           <Table>
