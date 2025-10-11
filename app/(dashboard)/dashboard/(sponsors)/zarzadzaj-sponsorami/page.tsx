@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { sponsorsType } from "@/types/sponsors";
+import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
@@ -18,42 +17,16 @@ import DeleteModal from "@/components/dashboard-ui/deleteModal";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Trash, SquarePen } from "lucide-react";
+import { useFetchSponsors } from "@/hooks/useFetchSponsors";
 
 export default function page() {
-  const [sponsors, setSponsors] = useState<sponsorsType[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { sponsors, loading, error, deleteSponsorFromState } =
+    useFetchSponsors();
   const [sponsorToDelete, setSponsorsToDelete] = useState<{
     id: number;
     name: string;
   }>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    async function fetchSponsors() {
-      setLoading(true);
-      try {
-        const res = await fetch("/api/sponsors");
-
-        if (!res.ok) {
-          throw new Error(`HTTP error: ${res.status}`);
-        }
-
-        const data = await res.json();
-        setSponsors(data);
-        setError(null);
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : "Nieznany błąd pobierania.";
-        setError(message);
-        console.error("Failed to download sponsors", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchSponsors();
-  }, []);
 
   const handleDelete = async () => {
     if (!sponsorToDelete) return;
@@ -65,7 +38,7 @@ export default function page() {
     );
 
     if (success) {
-      setSponsors((prev) => prev.filter((s) => s.id !== sponsorToDelete.id));
+      deleteSponsorFromState(sponsorToDelete.id);
     }
   };
 
