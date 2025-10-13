@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { Spinner } from "../ui/spinner";
 import { useFetchSponsors } from "@/hooks/useFetchSponsors";
 import Image from "next/image";
+import { InfiniteSlider } from "../ui/infinite-slider";
 
 export default function Sponsors() {
   const { sponsors, loading, error } = useFetchSponsors();
@@ -43,35 +44,39 @@ export default function Sponsors() {
               <Image
                 src={partner.logo}
                 height={100}
-                width={100}
+                width={150}
                 alt={partner.name}
                 key={index}
+                className="h-32 w-auto object-contain"
               />
             );
           })}
       </div>
-      <div className="flex flex-wrap justify-center items-center gap-10 mt-10">
+      <InfiniteSlider
+        speedOnHover={20}
+        speed={40}
+        gap={112}
+        className="flex items-center mt-16"
+      >
         {nonPartners.length > 0 &&
           nonPartners.map((nonPartner, index) => {
-            if (!nonPartner.logo) {
-              return (
-                <h1 key={index} className="text-lg font-bold">
-                  {nonPartner.name}
-                </h1>
-              );
-            }
-
             return (
-              <Image
-                src={nonPartner.logo}
-                height={80}
-                width={80}
-                alt={nonPartner.name}
-                key={index}
-              />
+              <div className="flex relative" key={index}>
+                {nonPartner.logo ? (
+                  <Image
+                    src={nonPartner.logo}
+                    height={100}
+                    width={100}
+                    className="h-16 w-auto object-contain"
+                    alt={nonPartner.name}
+                  />
+                ) : (
+                  <h1 className="font-bold text-md">{nonPartner.name}</h1>
+                )}
+              </div>
             );
           })}
-      </div>
+      </InfiniteSlider>
     </div>
   );
 }
