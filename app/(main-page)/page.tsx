@@ -4,6 +4,7 @@ import MatchSection from "@/components/main-page-layout/MatchSection";
 import StrategicPartnershipSection from "@/components/main-page-layout/StrategicPartnershipSection";
 import LeagueTable from "@/components/main-page-ui/LeagueTable";
 import SponsorsSection from "@/components/main-page-layout/SponsorsSection";
+import Footer from "@/components/main-page-layout/Footer";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <StrategicPartnershipSection />
       <LeagueTable />
       <SponsorsSection />
+      <Footer />
     </div>
   );
 }
