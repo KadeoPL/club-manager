@@ -29,6 +29,9 @@ export default function Sponsors() {
 
   return (
     <div className="w-full mx-auto">
+      <div>
+        <h1>Nasi partnerzy:</h1>
+      </div>
       <div className="flex flex-wrap justify-center items-center gap-10">
         {partners.length > 0 &&
           partners.map((partner, index) => {
@@ -52,31 +55,34 @@ export default function Sponsors() {
             );
           })}
       </div>
-      <InfiniteSlider
-        speedOnHover={20}
-        speed={40}
-        gap={112}
-        className="flex items-center mt-16"
-      >
-        {nonPartners.length > 0 &&
-          nonPartners.map((nonPartner, index) => {
-            return (
-              <div className="flex relative" key={index}>
-                {nonPartner.logo ? (
-                  <Image
-                    src={nonPartner.logo}
-                    height={100}
-                    width={100}
-                    className="h-16 w-auto object-contain"
-                    alt={nonPartner.name}
-                  />
-                ) : (
-                  <h1 className="font-bold text-md">{nonPartner.name}</h1>
-                )}
-              </div>
-            );
-          })}
-      </InfiniteSlider>
+      <div className="mt-20 flex items-center">
+        <h1 className="pr-6">Sponsorzy:</h1>
+        <InfiniteSlider
+          speedOnHover={20}
+          speed={60}
+          gap={112}
+          className="flex items-center"
+        >
+          {nonPartners.length > 0 &&
+            nonPartners.map((nonPartner, index) => {
+              return (
+                <div className="flex relative" key={index}>
+                  {nonPartner.logo ? (
+                    <Image
+                      src={nonPartner.logo}
+                      height={100}
+                      width={100}
+                      className="h-16 w-auto object-contain"
+                      alt={nonPartner.name}
+                    />
+                  ) : (
+                    <h1 className="font-bold text-md">{nonPartner.name}</h1>
+                  )}
+                </div>
+              );
+            })}
+        </InfiniteSlider>
+      </div>
     </div>
   );
 }

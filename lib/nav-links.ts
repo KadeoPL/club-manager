@@ -1,16 +1,15 @@
 export const navLinks = [
   { title: "Aktualności", url: "/aktualnosci" },
   {
-    title: "Seniorzy",
+    title: "O klubie",
     url: "",
     items: [
-      { title: "Skład", url: "/seniorzy/sklad" },
-      { title: "Terminarz i wyniki", url: "/seniorzy/terminarz" },
-      { title: "Tabela", url: "/seniorzy/tabela" },
+      { title: "Historia klubu", url: "/o-klubie/historia" },
+      { title: "Zarząd", url: "/o-klubie/zarzad" },
     ],
   },
   {
-    title: "Szkółka piłkarska",
+    title: "Drużyny",
     url: "",
     items: [
       { title: "Roczniki", url: "/szkolka-pilkarska/roczniki" },

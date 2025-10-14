@@ -21,19 +21,8 @@ export const dashboardNavLinks = [
     url: "#",
     icon: UserRound,
     items: [
-      { title: "Dodaj zawodnika", url: "#" },
-      { title: "Zarządzaj drużyną", url: "#" },
-    ],
-  },
-  {
-    title: "Mecze i wyniki",
-    url: "#",
-    icon: Trophy,
-    items: [
-      { title: "Dodaj mecz", url: "#" },
-      { title: "Zarządzaj wynikami", url: "#" },
-      { title: "Terminarz", url: "#" },
-      { title: "Tabela", url: "#" },
+      { title: "Dodaj drużynę", url: "#" },
+      { title: "Zarządzaj drużynami", url: "#" },
     ],
   },
   {
