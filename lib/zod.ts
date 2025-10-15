@@ -26,3 +26,9 @@ export const addSponsorSchema = z.object({
     error: "To pole jest wymagane",
   }),
 });
+
+export const addTeamSchema = z.object({
+  name: z
+    .string({ error: "Nazwa drużyny jest wymagana" })
+    .min(1, { message: "Nazwa drużyny jest wymagana" }),
+});
