@@ -2,9 +2,9 @@ import { pool } from "@/lib/db";
 
 export async function GET(
   req: Request,
-  { params }: { params: { name: string } }
+  context: { params: Promise<{ name: string }> }
 ) {
-  const { name } = params;
+  const { name } = await context.params;
 
   try {
     const result = await pool.query("SELECT * FROM teams WHERE name = $1", [
