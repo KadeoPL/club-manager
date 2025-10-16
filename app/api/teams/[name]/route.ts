@@ -1,14 +1,13 @@
 import { pool } from "@/lib/db";
 
-interface Context {
-  params: { name: string };
-}
-
-export async function GET(req: Request, context: Context) {
-  const name = context.params.name;
+export async function GET(
+  req: Request,
+  { params }: { params: { name: string } }
+) {
+  const { name } = params;
 
   try {
-    const result = await pool.query("SELECT * FROM teams WHERE name $1", [
+    const result = await pool.query("SELECT * FROM teams WHERE name = $1", [
       name,
     ]);
 
