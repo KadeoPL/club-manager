@@ -1,11 +1,11 @@
 import { pool } from "@/lib/db";
 
-interface params {
-  name: string;
+interface Context {
+  params: { name: string };
 }
 
-export async function GET(req: Request, params: params) {
-  const name = params.name;
+export async function GET(req: Request, context: Context) {
+  const name = context.params.name;
 
   try {
     const result = await pool.query("SELECT * FROM teams WHERE name $1", [
