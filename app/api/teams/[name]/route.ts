@@ -1,9 +1,10 @@
 import { pool } from "@/lib/db";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { name: string } }
-) {
+interface params {
+  name: string;
+}
+
+export async function GET(req: Request, params: params) {
   const name = params.name;
 
   try {
