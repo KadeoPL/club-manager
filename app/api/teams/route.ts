@@ -1,4 +1,5 @@
 import { pool } from "@/lib/db";
+import { off } from "process";
 
 export async function POST(req: Request) {
   const data = await req.json();
@@ -28,47 +29,28 @@ export async function POST(req: Request) {
   });
 }
 
-export async function GETALL(position: number) {
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const position = searchParams.get("position");
   const limit = 10;
-  const offset = position;
+  const offset = parseInt(position ?? "0", 10);
+
+  if (isNaN(offset) || offset < 0) {
+    return Response.json(
+      { message: "Nieprawidłowa wartość position (OFFSET)." },
+      { status: 400 }
+    );
+  }
+
   try {
-    const result = await pool.query(`SELECT * FROM teams LIMIT $1 OFFSET $2`, [
+    const result = await pool.query("SELECT * FROM teams LIMIT $1 OFFSET $2", [
       limit,
       offset,
     ]);
     return Response.json(result.rows);
   } catch (error) {
     return Response.json(
-      {
-        error: "Failed to fetch teams",
-      },
-      { status: 500 }
-    );
-  }
-}
-
-export async function GET(name: string) {
-  try {
-    const result = await pool.query(
-      "SELECT name * FROM teams WHERE name = $1",
-      [name]
-    );
-
-    if (result.rows.length === 0) {
-      return Response.json(
-        {
-          message: "Nie znaleziono drużyny",
-        },
-        { status: 404 }
-      );
-    }
-
-    return Response.json(result.rows[0]);
-  } catch (error) {
-    return Response.json(
-      {
-        error: "Failed to fetch team",
-      },
+      { message: ` Błąd przy pobieraniu drużyny, ${(error as Error).message}` },
       { status: 500 }
     );
   }
