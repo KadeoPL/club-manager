@@ -1,4 +1,4 @@
-export interface sponsorsType {
+export interface SponsorsType {
   id: number;
   name: string;
   logo: string;

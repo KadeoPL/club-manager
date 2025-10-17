@@ -22,7 +22,7 @@ export const dashboardNavLinks = [
     icon: UserRound,
     items: [
       { title: "Dodaj drużynę", url: "/dashboard/dodaj-druzyne" },
-      { title: "Zarządzaj drużynami", url: "#" },
+      { title: "Zarządzaj drużynami", url: "/dashboard/zarzadzaj-druzyna" },
     ],
   },
   {

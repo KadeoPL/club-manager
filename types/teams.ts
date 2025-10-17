@@ -1,4 +1,5 @@
 export interface TeamType {
+  id: number;
   team: string;
   points: number;
   matches: number;
