@@ -16,6 +16,8 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import EditButton from "./EditButton";
+import DeleteElementButton from "./DeleteElementButton";
+import DeleteModal from "./deleteModal";
 
 interface ManageDataType {
   endpoint: string;
@@ -56,7 +58,7 @@ export default function ManageData(props: ManageDataType) {
       {loading && <Spinner />}
       {error && <div className="text-red-500 mb-4">Błąd: {error}</div>}
 
-      {data.length === 0 && !loading && !error ? (
+      {/* {data.length === 0 && !loading && !error ? (
         <div>
           <div className="font-bold mb-5">
             Nie masz jeszcze żadnych sponsorów.
@@ -89,8 +91,8 @@ export default function ManageData(props: ManageDataType) {
                   <TableCell className="md:block hidden py-4">
                     {sponsor.logo ? (
                       <Image
-                        src={sponsor.logo}
-                        alt={sponsor.name}
+                        src={element.logo}
+                        alt={element.name}
                         height={100}
                         width={100}
                       ></Image>
@@ -101,18 +103,11 @@ export default function ManageData(props: ManageDataType) {
                   <TableCell className="py-4">
                     <div className="flex gap-4">
                       <EditButton />
-                      <div
-                        className="text-red-500 cursor-pointer flex gap-1 items-center"
-                        onClick={() => {
-                          setSponsorsToDelete({
-                            id: sponsor.id,
-                            name: sponsor.name,
-                          });
-                          setIsModalOpen(true);
-                        }}
-                      >
-                        <Trash size={16} /> Usuń
-                      </div>
+                      <DeleteElementButton
+                        setElementToDelete={setElementToDelete}
+                        setIsModalOpen={setIsModalOpen}
+                        element={element}
+                      />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -120,10 +115,10 @@ export default function ManageData(props: ManageDataType) {
             </TableBody>
           </Table>
         )
-      )}
-      {isModalOpen && sponsorToDelete && (
+      )} */}
+      {isModalOpen && elementToDelete && (
         <DeleteModal
-          name={sponsorToDelete.name}
+          name={elementToDelete.name}
           setIsOpen={setIsModalOpen}
           onConfirm={handleDelete}
         />
