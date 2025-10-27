@@ -19,13 +19,23 @@ import EditButton from "./EditButton";
 import DeleteElementButton from "./DeleteElementButton";
 import DeleteModal from "./deleteModal";
 
-interface ManageDataType {
+type TData = Record<string, any>;
+
+export interface ColumnDefinition<T extends TData> {
+  key: keyof T;
+  header: string;
+  render?: (row: T) => React.ReactNode;
+}
+
+interface ManageDataType<T extends TData> {
   endpoint: string;
   title: string;
   addElementLink: string;
+  data: T[];
+  columns: ColumnDefinition<T>[];
 }
 
-export default function ManageData(props: ManageDataType) {
+export default function ManageData<T extends TData>(props: ManageDataType<T>) {
   const { data, loading, error, deleteElementFromState } = useFetchData(
     props.endpoint
   );
@@ -58,7 +68,7 @@ export default function ManageData(props: ManageDataType) {
       {loading && <Spinner />}
       {error && <div className="text-red-500 mb-4">Błąd: {error}</div>}
 
-      {/* {data.length === 0 && !loading && !error ? (
+      {data.length === 0 && !loading && !error ? (
         <div>
           <div className="font-bold mb-5">
             Nie masz jeszcze żadnych sponsorów.
@@ -72,13 +82,15 @@ export default function ManageData(props: ManageDataType) {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[200px]">Nazwa</TableHead>
-                <TableHead className="w-[100px]">Partner</TableHead>
-                <TableHead className="md:table-cell hidden">Logo</TableHead>
+                {props.columns.map((col) => (
+                  <TableHead key={String(col.key)} className="w-[200px]">
+                    {col.header}
+                  </TableHead>
+                ))}
                 <TableHead>Zarządzaj</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
+            {/* <TableBody>
               {data.map((element, index) => (
                 <TableRow
                   key={element.id}
@@ -112,10 +124,10 @@ export default function ManageData(props: ManageDataType) {
                   </TableCell>
                 </TableRow>
               ))}
-            </TableBody>
+            </TableBody> */}
           </Table>
         )
-      )} */}
+      )}
       {isModalOpen && elementToDelete && (
         <DeleteModal
           name={elementToDelete.name}
