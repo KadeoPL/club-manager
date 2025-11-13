@@ -1,4 +1,4 @@
-import { ColumnDefinition } from "@/components/dashboard-ui/manageData";
+import { ColumnDefinition } from "@/components/dashboard-ui/ManageTable";
 import { SponsorsType } from "@/types/sponsors";
 import Image from "next/image";
 
